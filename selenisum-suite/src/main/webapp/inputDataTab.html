@@ -1,0 +1,76 @@
+<head>
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+</head>
+<div id=row1 class="form-control;">
+	<label id="pageLabel" class="element1">Domain</label> <select
+		ng-model="selectedDName" id="pagedropdown"
+		ng-change="DropDownDomains(selectedDName)" class="element2">
+		<option ng-repeat="name in domains">{{name}}
+	</select>
+</div>
+
+
+<br />
+
+<div id=row3 class="form-control;">
+	<label id="pageLabel" class="element1">PageName </label> 
+	<select
+		ng-model="selectedPageName" id="pagedropdown"
+		ng-change="dropDownChanged(selectedPageName)" class="element2">
+		<option ng-repeat="name in pagenames">{{name}}
+	</select>
+</div>
+</br>
+
+
+<div id=row4 style="margin-top: 10px" class="form-control;">
+	<label id="pageLabel" class="element1">Test Suite
+	</label> 
+	<select 
+		ng-model="selectedTestSuiteName" id="testsuitedropdown"
+		ng-change="changeSuite(selectedTestSuiteName)" class="element2">
+		<option ng-repeat="suite in inputTestSuites">{{suite.testSuiteName}}</option>
+	</select>
+</div>
+
+
+<div id=row5 style="margin-top: 10px" class="form-control;">
+	<label id="pageLabel" class="element1">Test Cases </label>
+	<select ng-model="selectedCase" 
+	ng-change="changeCase(selectedCase)" class="element2">
+		<option ng-repeat="case in testCases">{{case.testCaseName}}</option>
+	</select>
+</div>
+
+<div style="margin-top: 10px" >
+
+
+	<div>
+		<label id="pageelementLabel" class="element1">Page Element</label>
+		<select multiple ng-multiple="true" ng:model="selectPageElement" 
+			ng-options="element.pageElementType  +' --> '+ element.pageElementId  for element in elements" class="element2" 
+			ng-change="changePageElement(selectPageElement)">
+		</select>
+	</div>
+
+	<div ng-repeat="newelement in selectPageElement">
+	<label id="pageelementLabel" class="element1">{{newelement.pageElementId}}</label>
+		 <input type="text" ng-model="pageElementId" id ={{newelement.pageElementId}} class="element2" />
+		<br />
+	</div>
+
+	<div >
+		<label  class="element1">Expected Result</label>
+			<input type="text" name="project.expectedresult" required="required"
+			placeholder="expected result" class="element2"/>
+	</div>
+
+	<div class="button-allignment">
+		<button class="btn btn-success element1" ng-click="postHttpJSON()">Save</button>
+		<!-- 				<button class="btn btn-primary"  ng-click="postHttpJSON()">testGet</button>		 -->
+		<button class="btn btn-warning element1">Cancel</button>
+
+	</div>
+
+</div>

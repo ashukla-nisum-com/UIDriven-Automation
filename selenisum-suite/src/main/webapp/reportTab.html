@@ -1,0 +1,123 @@
+<div class="editor-label">
+
+
+    <div class="row">
+      <div class="col-md-3">
+        <p class="input-group">
+          <input type="text" class="date-control" uib-datepicker-popup="{{format}}" ng-model="dateFrom"  placeholder="Report :From Date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+      <div class="col-md-3">
+        <p class="input-group">
+          <input type="text" class="date-control" uib-datepicker-popup="{{format}}" placeholder="Report: To Date" ng-model="dateTo" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+
+      	<div class="col-md-3 col-md-push-1">
+			<div class="input-group">
+				<div class="input-group-addon">
+					<i class="fa fa-search"></i>
+				</div>
+				<input type="text" class="search-report-style" placeholder="Search Report"	ng-model="searchReport">
+			</div>
+			
+			
+					
+		</div>
+		
+		
+    </div>
+	<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" > </dir-pagination-controls>		 
+	<ui>
+	
+	<div
+		dir-paginate="report in reports  | filter:searchReport | FilterByDate:dateFrom:dateTo | itemsPerPage:5">
+
+		<li><uib-accordion close-others="oneAtATime"> <uib-accordion-group
+				is-open="report.reportStatus.open"> <uib-accordion-heading>
+			<span class="reportTime">{{report.projectName}} :
+				{{report.reportDate | date:"MM/dd/yyyy 'at' h:mma"}}</span> </span> <i
+				class="pull-right glyphicon"
+				ng-class="{'glyphicon-chevron-down': report.reportStatus.open, 'glyphicon-chevron-right': !report.reportStatus.open}"></i>
+			</uib-accordion-heading>
+
+
+			<div ng-repeat="testSuite in report.testSuites | filter:searchReport"
+				class="testSuite-label">
+
+				<uib-accordion close-others="oneAtATime"> <uib-accordion-group
+					is-open="testSuite.open"> <uib-accordion-heading>
+				<span class="reportTime">Test Suite :
+					{{testSuite.testSuiteName}} </span> <i class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': testSuite.open, 'glyphicon-chevron-right': !testSuite.open}"></i>
+				</uib-accordion-heading>
+
+				<div
+					ng-repeat="testCase in testSuite.testCases | filter:searchReport">
+					<uib-accordion close-others="oneAtATime"> <uib-accordion-group
+						template-url="template/accordion/accordion-group-testcase.html"
+						is-open="status.open"> <uib-accordion-heading>
+					<span class="reportTime">Test Case :
+						{{testCase.testCaseName}} : {{testCase.testCaseDesc}}</span> <i
+						class="pull-right glyphicon"
+						ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+					</uib-accordion-heading> <!-- <div ng-repeat="testStep in testCase.testSteps" class="boldLabel"> -->
+
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<!-- <th ><span>Test Step</span></th> -->
+								<th><span>Action</span></th>
+								<th><span>Expected</span></th>
+								<th><span>Actual</span></th>
+								<th><span> <a href="#"
+										ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Status <span ng-show="sortType == 'name' && !sortReverse"
+											class="fa fa-caret-down"></span> <span
+											ng-show="sortType == 'name' && sortReverse"
+											class="fa fa-caret-up"></span>
+									</a>
+								</span></th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								ng-repeat="testStep in testCase.testSteps | orderBy:sortType:sortReverse | orderBy:filter">
+								<!-- <td >{{testStep.testStepName}}</td> -->
+								<td>{{testStep.action}}</td>
+								<td>{{testStep.expected}}</td>
+								<td>{{testStep.actual}}</td>
+								<td>{{testStep.status}}</td>
+
+							</tr>
+							<tr>
+								<td colspan="4" align="right">Test Case Executed in
+									{{testCase.time}} seconds.</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- </div> --> </uib-accordion-group> </uib-accordion>
+				</div>
+
+				</uib-accordion-group> </uib-accordion>
+
+
+
+
+			</div>
+			</uib-accordion-group> </uib-accordion></li>
+	</div>
+	</ui>
+		<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" > </dir-pagination-controls>
+</div>
+
+
+
+

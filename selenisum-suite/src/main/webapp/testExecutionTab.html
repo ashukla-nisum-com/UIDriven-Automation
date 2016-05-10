@@ -1,0 +1,48 @@
+
+<head>
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+<div style="padding-left:20px" >
+            <div ng-form="executionForm" >
+              
+              
+			  <div id=row1 class="form-group" >
+				<label id="pageLabel" class="element1" >Domain</label> 
+				<select ng-model="project.domainName" id="pagedropdown" ng-change="DropDownDomains()" class="element2" >
+					<option ng-repeat="name in domains">{{name}}
+				</select>
+			  </div> 
+			  
+			<div id=row2 class="form-group" >
+				<label id="pageLabel" class="element1" >Browser Type</label> 
+				<select ng-model="project.brwType" id="pagedropdown" ng-change="DropDownBrowsers()" class="element2" >
+					<option ng-repeat="name in browsers">{{name}}
+				</select> 
+			 </div> 
+			  
+			 
+			  
+ 		<div id=row4 class="form-group">
+             <label id="pageLabel" class="element1" >Test Suite  </label>
+				
+		        <select  ng-model="selectedTestSuite" ng-change="changeSuite(selectedTestSuite)" class="element2" >
+		        <option value="">--- Test Suites ---</option>
+    				<option ng-repeat="(key, value) in testSuiteMap">{{key}}</option>
+				</select>
+					
+		        
+			</div>
+			  
+		<div id=row5 class="form-group">
+             <label id="pageLabel" class="element1" >Test Cases : </label> 
+				<select ng-model="selectedTestCases" class="element2" multiple ng-change="changeCase(selectedTestCases)" >
+				
+		        	<option ng-repeat="case in testCases">{{case}}</option>
+		        </select>
+			</div>
+
+			<div class="button-allignment">
+             <button class="btn btn-success element1" ng-click="executeTest()">Execute</button>
+             </div>
+            </div>
+</div>

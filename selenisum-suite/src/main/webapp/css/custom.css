@@ -1,0 +1,229 @@
+  
+.element1 {display:inline-block;margin-right:10px; width:10%;margin-top: 10px } 
+.element2 {display:inline-block; width:20%;}
+
+
+.align-domain-label {
+	padding-right: 52px;
+	padding-bottom: 13px
+}
+
+.align-browser-label {
+	padding-right: 12px;
+	padding-bottom: 13px
+}
+
+.align-pagename-label {
+	padding-right: 29px;
+	padding-bottom: 13px
+}
+
+.align-testsuite-label {
+	padding-right: 36px;
+	padding-bottom: 13px
+}
+
+.align-testcase-label {
+	padding-right: 28px;
+	padding-bottom: 13px
+}
+
+.align-pageelement-label {
+	padding-right: 15px;
+	padding-bottom: 13px
+}
+
+.align-expectedresult-label {
+	padding-bottom: 13px
+}
+
+.btn-padding {
+	padding-bottom: 13px
+}
+
+input, button, select, textarea {
+	width: intial;
+}
+
+input, select {
+	height: 22px;
+}
+
+.nav-tabs, li.ng-isolate-scope a:ACTIVE {
+	background: aliceblue;
+	color: #fff;
+	text-shadow: none;
+	float:left;
+}
+
+.tab-content {
+	padding-top: 50px;
+	padding-left: 10px;
+	
+}
+
+.form-control {
+	width: inherit;
+}
+
+.custom-border {
+	border: 2px ridge aliceblue;
+	border-left-style: ridge;
+	border-radius: 3px;
+	margin-top: 23px;
+	margin-left: 70px;
+	width: 90%;
+	float: left;
+}
+
+.custom-border {
+	background-color: aliceblue;
+}
+
+.top-header-label {
+	padding-left: 322px;
+	font-family: cursive;
+	font-size: 32px;
+	margin-top: 20px;
+}
+
+.nisum-log-style {
+	width: 90px;
+	height: 58px;
+	margin-left: 74px;
+}
+
+sup {
+	font-size: 100%;
+}
+pre {
+	width: 335px;
+	border: 0px;
+	font-size: 10px;
+	padding: 3px;
+}
+.form-control {
+	width: 300px !important;
+	display: inline;
+	font-size: 12px;
+	margin-top: 32px;
+	margin-left:22px;
+}
+ul {
+	list-style: outside none none;
+}
+.alert-warning {
+ border: 1px solid #faebcc;
+ border-radius: 4px;
+ margin: 5px;
+}
+button.close {
+	padding-left: 25px;
+}
+
+/* Report Tab start*/
+
+
+.boldLabel {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+
+.editor-label {
+	padding-left: .4em;
+	width: 90%;
+}
+
+.reportTime {
+	font-family: Helvetica;
+	font-size: 14px;
+	border: none;
+}
+
+.testSuite-label {
+	padding-left: 30px;
+}
+
+.panel-testCase>.panel-heading {
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #4cae4c;
+}
+.date-control{
+    display: block;
+  width: 100% !important;
+  min-width: 150px; 
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* Report Tab End*/
+
+/* Test Suite Tab Start */
+/* Glyph, by Harry Roberts */
+
+hr.style-one {
+    border: 10;
+    height: 1px;
+    
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    
+	color: #123455;
+	
+ 
+}
+.sort-icon {
+    font-size: 9px;
+    margin-left: 5px;
+}
+
+th {
+    cursor:pointer;
+}
+
+/* Test Suite Tab End */
+  
+.suite-align {
+	margin-left: 3px !important;
+}
+.testcase-style{
+	margin-left: 0px;
+    margin-top: 2px;
+}
+.button-allignment{
+	padding-bottom: 30px
+}
+.search-report-style{
+	height: 37px !important;
+    width: 350px;
+}
+
+#wrapper {
+    width: 100%;
+    /* border: 1px solid lightblue; */
+    overflow: hidden; /* add this to contain floated children */
+}
+#first {
+    width: 60%;
+    float:left; /* add this */
+    /* border: 1px solid lightblue; */
+}
+#second {
+	margin-right: 20px;
+    /* border: 1px solid lightblue; */
+     overflow: hidden; /* if you don't want #second to wrap below #first */
+}
+

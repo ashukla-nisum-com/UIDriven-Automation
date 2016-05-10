@@ -1,0 +1,6 @@
+.settings/
+target/
+webcontent/
+.classpath
+.project
+bin/

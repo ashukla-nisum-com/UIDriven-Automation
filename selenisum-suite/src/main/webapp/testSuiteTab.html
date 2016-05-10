@@ -1,0 +1,124 @@
+
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+<div ng-controller="testSuiteCtrl">
+	
+	<div id="wrapper">
+	<div id="first" >
+			<label id="pageLabel">Page Name: </label> 
+			<select class="form-control" 
+				ng-model="selectedPageName" id="pagedropdown"
+				ng-change="selectPageName()" 
+				ng-disabled="disablePageName">
+				<option ng-repeat="name in pagenames">{{name}}</option>
+			</select>
+			
+		
+		<div id="testSuiteContainer">
+			<label>New Test Suite:</label> <input
+				ng-class="{'alert-success' : hideTxtBox}" class="form-control suite-align"
+				type="text" id="newSuiteName" ng-readonly="hideTxtBox || !disablePageName"
+				ng-dblclick="setSuiteName()" ng-model="testSuite.testSuiteName"
+				ng-blur="makeSuiteNameStatic()"
+				ng-keyup="$event.keyCode == 13 && makeSuiteNameStatic()" /> <span
+				ng-show="hideTxtBox"><sup>*</sup></span>
+		</div>
+		<hr/>
+		
+		<div>
+			<label> New Test Case :</label> <input class="form-control testcase-style"
+				ng-readonly="!hideTxtBox" ng-model="newTestCaseName" />
+				<button class="btn btn-success" ng-disabled="!hideTxtBox"
+				ng-click="addNewTestCase()">+ Test Case</button>
+		</div>
+		
+		
+		<div>
+			<span ng-show="hideTxtBox"> <pre>
+<i>Note: <sup>*</sup> denotes that the Test Suite name is read-only. 
+Please double click on it to edit the Test Suite name.</i>
+				</pre></span>
+		</div>
+		</div>
+	
+	<div id="second">
+	<div class="alert alert-success" ng-show="showSuccessAlert" style="padding-right: 10px;margin-right:10px; margin-hight:10px;">{{successTextAlert}}</div>
+	<div id="right" >
+	
+		<label ng-show="hideTxtBox" class="btn btn-info" >{{testSuite.testSuiteName}} ({{selectedPageName}})</label>
+		<ol class="unstyled">
+			<li
+				ng-class="{ 'alert-warning': hideTxtBox, 'alert-danger': !hideTxtBox }"
+				style="padding: 5px;" ng-repeat="testCase in testSuite.testCases"><span>{{testCase.testCaseName}}</span>
+				<button ng-disabled="!hideTxtBox" class="close"
+					ng-click="removeTestCase($index,testCase.name)" role="alert"
+					type="button">
+					<span aria-hidden="true">×</span> <span class="sr-only">Close</span>
+				</button></li>
+			<div style="float: left;" ng-hide="!testSuite.testCases.length">
+				<button class="btn btn-primary" ng-click="saveTestSuite()">Save</button>
+			</div>
+
+		</ol>
+	</div>
+
+	<div style="visibility: hidden;">
+		<button class="btn btn-danger" ng-disabled="true"
+			ng-click="alert('coming soon')">Save</button>
+	</div>
+</div>
+</div>
+<div class="bs-component" style="float: left; width: 100%;">
+<hr class="style-one"  >
+    <div class="row">
+      <div class="col-md-6">
+      <input type="text" ng-model="search" class="form-control" placeholder="Search Test Suite" style="float: left; width: 60%;">
+      </div>
+      <div class="col-md-6">
+      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" style="margin-left:360px;"> </dir-pagination-controls>
+      </div>
+</div>
+
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th ng-click="sort('testSuiteName')">Test Suite Name
+                						<span class="glyphicon sort-icon" ng-show="sortKey=='testSuiteName'" 
+                						ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            					</th>
+                                    <th>Test Cases</th>
+                                    <th>Page Name</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="testSuite in savedTestSuites  |orderBy:sortKey:reverse |filter:search | itemsPerPage:5">
+                                    <td style="width: 40%;">{{testSuite.testSuiteName}}</td>
+                                    <td style="width: 20%;">
+                                    <ui>
+										<div ng-repeat="testCase in testSuite.testCases">
+											<li>{{testCase.testCaseName}}
+										
+										</div>
+                                    </td>
+                                    <td style="width: 10%;">
+										<div ng-repeat="testCase in testSuite.testCases">
+										 {{testCase.pageName}}
+										</div>
+										</li>
+										</ui>
+                                    </td>
+                                    <td style="width: 10%;"><button class="btn btn-primary" 
+										ng-click="editTestSuite(testSuite)">Edit</button>
+									</td>
+                                    <td style="width: 10%;"><button class="btn btn-danger" 
+										ng-click="deleteTestSuite(testSuite)">Delete</button>
+									</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" > </dir-pagination-controls> 
+                    </div>
+
