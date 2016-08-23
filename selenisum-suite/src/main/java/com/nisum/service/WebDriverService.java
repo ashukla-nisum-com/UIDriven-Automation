@@ -56,7 +56,11 @@ public class WebDriverService {
         	if(vProjectRun.equalsIgnoreCase("ON"))
         	{
         		
+        		//TODO:: start Need to move below code generic 
+        		//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nisum-User\\Downloads\\geckodriver-v0.10.0-win64\\geckodriver.exe");
+        		MarionetteDriverManager.getInstance().setup();
         		
+        		//TODO:: Stop
         		driver=new FirefoxDriver();
         		vProjectName=xr.getCellData("Projects", "ProjectName", i);
         		vProjectUrl=xr.getCellData("Projects", "ProjectUrl", i);
