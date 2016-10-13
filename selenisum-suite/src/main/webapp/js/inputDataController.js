@@ -102,7 +102,7 @@ app.controller('inputDataCtrl',
 		        }
 				
 		    	//alert("latest");
-		        $scope.selectedPageName = selectedPageName;
+		        //$scope.selectedPageName = selectedPageName;
 		        //var valData = $scope.selectedDName + $scope.selectedPageName + "." + $scope.selectedFileExtension;
 		        var valData = $scope.selectedDName +  "/" + $scope.selectedPageName;
 

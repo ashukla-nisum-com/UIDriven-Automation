@@ -15,6 +15,8 @@ public class TestCase {
 	private List<PageElement> pageElement;
 	private Long time;
 	private String expectedResult;
+	private PageElement expectedResultElement;
+	
 	private String pageName;
 	
 	public String getPageName() {
@@ -83,5 +85,13 @@ public class TestCase {
 
 	public void setPageElement(List<PageElement> pageElement) {
 		this.pageElement = pageElement;
+	}
+
+	public PageElement getExpectedResultElement() {
+		return expectedResultElement;
+	}
+
+	public void setExpectedResultElement(PageElement expectedResultElement) {
+		this.expectedResultElement = expectedResultElement;
 	}
 }

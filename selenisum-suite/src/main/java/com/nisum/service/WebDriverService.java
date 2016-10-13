@@ -7,10 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -58,10 +58,12 @@ public class WebDriverService {
         		
         		//TODO:: start Need to move below code generic 
         		//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nisum-User\\Downloads\\geckodriver-v0.10.0-win64\\geckodriver.exe");
-        		MarionetteDriverManager.getInstance().setup();
+        		//MarionetteDriverManager.getInstance().setup();
         		
         		//TODO:: Stop
-        		driver=new FirefoxDriver();
+        		String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
+        		System.setProperty("webdriver.chrome.driver", 	path);
+        		driver=new ChromeDriver();
         		vProjectName=xr.getCellData("Projects", "ProjectName", i);
         		vProjectUrl=xr.getCellData("Projects", "ProjectUrl", i);
         		vModuleFiles=xr.getCellData("Projects", "ModuleFiles", i);

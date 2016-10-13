@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +30,12 @@ import com.mongodb.util.JSON;
 import com.nisum.domain.PageElement;
 import com.nisum.domain.Project;
 import com.nisum.domain.Report;
+import com.nisum.domain.TestCase;
+import com.nisum.domain.TestSuite;
+import com.nisum.repositories.ProjectRepository;
+import com.nisum.service.TestExecuter;
 import com.nisum.service.WebDriverService;
 import com.nisum.util.TestScenarios;
-import com.thoughtworks.selenium.webdriven.commands.Type;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
@@ -43,6 +47,12 @@ public class SelenisumController {
 
 	@Autowired
 	private WebDriverService driverScript;
+	
+	@Autowired
+	private TestExecuter testExecuter;
+	
+	@Autowired
+	private ProjectRepository projectRepository;
 
 	@ApiOperation(value = "Service brings all the Pageelemnts and tag names")
 	@RequestMapping(value = "/getElements", method = RequestMethod.GET, produces = "application/json")
@@ -50,7 +60,10 @@ public class SelenisumController {
 	public ResponseEntity<List<PageElement>> getElements(@ApiParam(value = "input") 
 											@RequestParam("input") String input) {
 		input = URLDecoder.decode(input);
-		WebDriver browser = new FirefoxDriver();
+		String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
+		System.setProperty("webdriver.chrome.driver", 
+				path);
+		WebDriver browser = new ChromeDriver();
 		browser.get(input);
 
 		List<WebElement> link = browser.findElements(By.xpath("//*[@id]"));
@@ -60,6 +73,10 @@ public class SelenisumController {
 			PageElement element = new PageElement();
 			element.setPageElementId(ele.getAttribute("id"));
 			element.setPageElementType(ele.getTagName());
+			
+			if("input".equals(ele.getTagName())){
+				element.setPageElementAttributeType(ele.getAttribute("type"));
+			}
 			pageElements.add(element);
 		}
 
@@ -81,8 +98,17 @@ public class SelenisumController {
 		System.out.println(project);
 		try {
 			String reportPath = context.getRealPath("");
-
-			report = driverScript.main(project + "Results");
+			String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
+			System.setProperty("webdriver.chrome.driver", 
+					path);
+			WebDriver driver = new ChromeDriver();
+			
+			//
+			//project =projectRepository.findAll();
+			
+			project = getTestData(); //TODO :: need to delete and build project object from input and database call
+			testExecuter.execute(project, driver);
+			//report = driverScript.main(project + "Results");
 
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
@@ -101,4 +127,68 @@ public class SelenisumController {
 		return new ResponseEntity<List<Report>>(reports, HttpStatus.OK);
 	}
 
+	
+	
+	private Project getTestData(){
+		Project pro = new Project();
+		List<TestSuite> tsList = new ArrayList<TestSuite>();
+		pro.setTestSuite(tsList);
+		TestSuite ts = new TestSuite();
+		tsList.add(ts);
+		
+		List<TestCase> tcList = new ArrayList<TestCase>();
+		TestCase tc = new TestCase();
+		PageElement pe = new PageElement();
+		pe.setPageElementType("a");
+		pe.setPageElementValue("Sign Out");
+		tc.setExpectedResultElement(pe);
+		tcList.add(tc);
+		ts.setTestCases(tcList);
+		String domainName = "http://www.safeway.com";
+		 String  pageUrl = "ShopStores/OSSO-Login.page";;
+		
+		
+		pro.setDomainName(domainName);
+		pro.setPageURL(pageUrl);
+		
+		
+		ts.setTestSuiteName("Login Page Test Suite");
+		
+		
+		
+		
+		tc.setTestCaseName("Login Page Test Case");
+		List<PageElement> pageList = new ArrayList<PageElement>();
+		tc.setPageElement(pageList);
+		
+		PageElement element1 = new PageElement();
+		element1.setPageElementId("userId");
+		element1.setPageElementType("input");
+		element1.setPageElementAttributeType("text");
+		element1.setPageElementValue("qatest@gmail.com");
+		
+		PageElement element2 = new PageElement();
+		element2.setPageElementName("fakePassword");
+		element2.setPageElementType("input");
+		element2.setPageElementAttributeType("text");
+		//element2.setPageElementValue("");
+		
+		PageElement element3 = new PageElement();
+		element3.setPageElementId("password");
+		element3.setPageElementType("input");
+		element3.setPageElementAttributeType("text");
+		element3.setPageElementValue("ab12ab12");
+		
+		PageElement element4 = new PageElement();
+		element4.setPageElementId("SignInBtn");
+		element4.setPageElementType("a");
+		
+		
+		
+		pageList.add(element1);
+		//pageList.add(element2);
+		pageList.add(element3);
+		pageList.add(element4);
+		return pro;
+	}
 }

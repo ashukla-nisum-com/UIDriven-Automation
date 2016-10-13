@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -25,21 +26,34 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<dependency>
+		 <dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.53.0</version>
 		</dependency>
-		<dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+<!-- <dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-chrome-driver</artifactId>
+    <version>3.0.0-beta3</version>
+</dependency> -->
+		
+		<!-- <dependency>
     			<groupId>io.github.bonigarcia</groupId>
     			<artifactId>webdrivermanager</artifactId>
-    			<version>1.4.8</version>
+    			<version>1.4.9</version>
 		</dependency>
 		<dependency>
         		<groupId>org.seleniumhq.selenium</groupId>
         		<artifactId>selenium-firefox-driver</artifactId>
         		<version>3.0.0-beta2</version>
-    		</dependency> 
+    	</dependency>  -->
+    	<!-- <dependency>
+        		<groupId>org.seleniumhq.selenium</groupId>
+        		<artifactId>selenium-firefox-driver</artifactId>
+        		<version>3.0.0-beta3</version>
+    	</dependency> --> 
 		<dependency>
 			<groupId>org.apache.james</groupId>
 			<artifactId>apache-mime4j</artifactId>
@@ -120,7 +134,13 @@
 			<version>0.6.6</version>
 		</dependency>
         
-
+	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
@@ -130,6 +150,12 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+				<!-- <configuration>
+              <verbose>true</verbose>
+              <fork>true</fork>
+              <executable>C:\Program Files\Java\jdk1.8.0_101\bin\javac</executable>
+              <compilerVersion>1.8</compilerVersion>
+            </configuration> -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -160,9 +186,9 @@
 			</plugin>
 			<!-- Jetty Configuration -->
 			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.17.v20150415</version>
+				<groupId>org.mortbay.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>8.1.12.v20130726</version>
 				<configuration>
 					<stopKey>STOP</stopKey>
 					<stopPort>9999</stopPort>
@@ -201,7 +227,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
+					<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat8-maven-plugin</artifactId>
 				<version>2.2</version>
