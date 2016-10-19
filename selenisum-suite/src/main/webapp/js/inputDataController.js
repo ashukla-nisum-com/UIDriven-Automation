@@ -7,9 +7,12 @@ app.controller('inputDataCtrl',
 	
 			$scope.pagenames = [ "login", "checkout", "payment" ];
 			$scope.domains = [ "Safeway", "Walmart", "Gap", "Target" ];
-
-
 			$scope.browsers = [ "Chrome", "Firefox", "Safari", "Explorer" ];
+			$scope.expectedActions = [ "FIND LINK TEXT", "FIND MESSAGE TEXT", 
+			                           "FIND ELEMENT BY ID", "FIND ELEMENT BY NAME",
+			                           "NAVIGATE TO", "CHECK VISIBILITY",
+			                           "CHECK DISABILITY" , "CHECK ATTRIBUTE",
+			                           "CHECK PROPERTY" , "OTHER"];
 			
             $scope.project = {
             		pageURL:"testingpageurl123",
